@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Library</string>
+    <string name="textview1">Διαθέσιμα βιβλία στη βιβλιοθήκη</string>
+    <string name="next">Προβολή βιβλίου</string>
+    <string name="title">Τίτλος</string>
+    <string name="writer">Συγγραφέας</string>
+    <string name="desc">Περιγραφή βιβλίου</string>
+    <string name="back">Επιστροφή</string>
+</resources>
