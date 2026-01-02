@@ -25,37 +25,35 @@
 - Material Components
 
 ## Δομή φακέλων
-app/    
-├── src/main/java/com/example/mylibrary/    
-│    
-│ ├── MainActivity.java    
-│ ├── FirstFragment.java   
-│ ├── SecondFragment.java    
+app/src/main/    
+├── java/com/example/mylibrary/    
 │ ├── Book.java    
 │ ├── BookList.java    
 │ ├── BookViewModel.java    
 │ ├── Categories.java    
+│ ├── FirstFragment.java   
+│ ├── MainActivity.java    
 │ ├── SQLiteConnection.java    
+│ ├── SecondFragment.java    
 │ ├── SelectionLoggerContract.java    
 │ └── SelectionLoggerDbHelper.java    
 │    
-├── src/main/res/    
-│    
+├── res/    
+│ ├── color/   
+│ │  └── button_hover.xml    
 │ ├── layout/    
-│ │ ├── main_activity.xml    
-│ │ ├── first_fragment.xml    
+│ │  ├── first_fragment.xml    
+│ │  ├── main_activity.xml    
 │ │ ├── second_fragment.xml    
 │ │ └── spinner_item.xml   
-│    
 │ ├── navigation/    
 │ │ └── nav_graph.xml    
-│    
 │ └── values/    
-│ ├── colors.xml    
-│ └── strings.xml    
+│ │ ├── colors.xml    
+│ │ └── strings.xml    
 │    
-└── assets/    
-└── library.xml    
+├── assets/    
+│ └── library.xml    
 
 ## Τοπική εκτέλεση
 
