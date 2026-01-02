@@ -4,10 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.mylibrary.Book;
-import com.example.mylibrary.SelectionLoggerContract;
-import com.example.mylibrary.SelectionLoggerDbHelper;
-
 import java.util.Date;
 
 public class SQLiteConnection {
@@ -24,6 +20,7 @@ public class SQLiteConnection {
         ContentValues values = new ContentValues();
         values.put(SelectionLoggerContract.LoggerEntry.COLUMN_NAME_TITLE, book.getTitle());
         values.put(SelectionLoggerContract.LoggerEntry.COLUMN_NAME_WRITER, book.getWriter());
+        values.put(SelectionLoggerContract.LoggerEntry.COLUMN_NAME_CATEGORY, book.getCategory());
         values.put(SelectionLoggerContract.LoggerEntry.COLUMN_NAME_DESCRIPTION, book.getDescription());
         values.put(SelectionLoggerContract.LoggerEntry.COLUMN_NAME_TIMESTAMP,
                 new Date(System.currentTimeMillis()).toString());

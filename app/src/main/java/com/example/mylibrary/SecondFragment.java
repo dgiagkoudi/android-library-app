@@ -28,6 +28,7 @@ public class SecondFragment extends Fragment {
 
         TextView titleText = view.findViewById(R.id.text_title);
         TextView writerText = view.findViewById(R.id.text_writer);
+        TextView categoryText = view.findViewById(R.id.text_category);
         TextView descText = view.findViewById(R.id.text_description);
         Button backButton = view.findViewById(R.id.button_back);
 
@@ -39,6 +40,7 @@ public class SecondFragment extends Fragment {
         if (book != null) {
             titleText.setText(book.getTitle());
             writerText.setText(book.getWriter());
+            categoryText.setText(book.getCategory());
             descText.setText(book.getDescription());
         }
 

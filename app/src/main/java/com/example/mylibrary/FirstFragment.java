@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,9 @@ public class FirstFragment extends Fragment {
 
     private Spinner spinner;
     private Button button;
+    private ChipGroup chipGroupCategories;
     private BookViewModel viewModel;
+    private List<Book> currentBooksInSpinner = new ArrayList<>();
 
     @Nullable
     @Override
@@ -35,6 +39,7 @@ public class FirstFragment extends Fragment {
 
         spinner = view.findViewById(R.id.spinnerbl);
         button = view.findViewById(R.id.button1);
+        chipGroupCategories = view.findViewById(R.id.chipGroupCategories);
 
         viewModel = new ViewModelProvider(requireActivity())
                 .get(BookViewModel.class);
@@ -52,46 +57,90 @@ public class FirstFragment extends Fragment {
         List<Book> books = loader.getBooks();
 
         viewModel.setBooks(books);
+        updateSpinner(books);
+
+        String[] categories = Categories.all();
+
+        for (String category : categories) {
+            Chip chip = new Chip(requireContext());
+            chip.setText(category);
+            chip.setCheckable(true);
+            chipGroupCategories.addView(chip);
+        }
+
+        chipGroupCategories.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            List<Book> allBooks = viewModel.getBooks();
+            List<Book> filteredBooks = new ArrayList<>();
+
+            clearSpinner();
+
+            if (checkedIds.isEmpty()) {
+                filteredBooks.addAll(allBooks);
+            } else {
+                Chip selectedChip = group.findViewById(checkedIds.get(0));
+                String selectedCategory = selectedChip.getText().toString();
+
+                for (Book book : allBooks) {
+                    if (book.getCategory().equals(selectedCategory)) {
+                        filteredBooks.add(book);
+                    }
+                }
+            }
+
+            updateSpinner(filteredBooks);
+        });
+    }
+
+    private void updateSpinner(List<Book> booksToShow) {
+        currentBooksInSpinner.clear();
+        currentBooksInSpinner.addAll(booksToShow);
 
         List<String> titles = new ArrayList<>();
         titles.add("Επιλέξτε βιβλίο");
 
-        for (Book book : books) {
+        for (Book book : booksToShow) {
             titles.add(book.getTitle());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),
-                android.R.layout.simple_spinner_item,
+                R.layout.spinner_item,
                 titles
         );
-
-        adapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
-
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
     }
 
-    private void onButtonClick() {
+    private void clearSpinner() {
+        spinner.setAdapter(null);
+    }
 
+    private void onButtonClick() {
         int position = spinner.getSelectedItemPosition();
 
         if (position == 0) {
-            Toast myToast=Toast.makeText(
+            android.widget.Toast.makeText(
                     requireContext(),
                     "Παρακαλώ επιλέξτε βιβλίο",
-                    Toast.LENGTH_LONG);
-            myToast.show();
+                    android.widget.Toast.LENGTH_LONG).show();
             return;
         }
 
-        Book selectedBook =
-                viewModel.getBooks().get(position - 1);
+        Book selectedBook = currentBooksInSpinner.get(position - 1);
 
         viewModel.setSelectedBook(selectedBook);
 
         NavHostFragment.findNavController(this)
                 .navigate(R.id.action_firstFragment_to_secondFragment);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        clearSpinner();
+
+        chipGroupCategories.clearCheck();
+        updateSpinner(viewModel.getBooks());
     }
 }

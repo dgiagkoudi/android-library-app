@@ -4,6 +4,7 @@
     <string name="next">Προβολή βιβλίου</string>
     <string name="title">Τίτλος</string>
     <string name="writer">Συγγραφέας</string>
+    <string name="category">Είδος βιβλίου</string>
     <string name="desc">Περιγραφή βιβλίου</string>
     <string name="back">Επιστροφή</string>
 </resources>

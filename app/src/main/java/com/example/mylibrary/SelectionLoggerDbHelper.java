@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.mylibrary.SelectionLoggerContract;
-
 public class SelectionLoggerDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "SelectionLogger.db";
 
     private static final String SQL_CREATE_ENTRIES =
@@ -15,6 +13,7 @@ public class SelectionLoggerDbHelper extends SQLiteOpenHelper {
                     SelectionLoggerContract.LoggerEntry._ID + " INTEGER PRIMARY KEY," +
                     SelectionLoggerContract.LoggerEntry.COLUMN_NAME_TITLE + " TEXT," +
                     SelectionLoggerContract.LoggerEntry.COLUMN_NAME_WRITER + " TEXT," +
+                    SelectionLoggerContract.LoggerEntry.COLUMN_NAME_CATEGORY + " TEXT," +
                     SelectionLoggerContract.LoggerEntry.COLUMN_NAME_DESCRIPTION + " TEXT," +
                     SelectionLoggerContract.LoggerEntry.COLUMN_NAME_TIMESTAMP + " TEXT)";
 

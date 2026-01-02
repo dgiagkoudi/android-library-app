@@ -47,12 +47,17 @@ public class BookList {
                             .item(0)
                             .getTextContent();
 
+                    String category = element
+                            .getElementsByTagName("category")
+                            .item(0)
+                            .getTextContent();
+
                     String description = element
                             .getElementsByTagName("description")
                             .item(0)
                             .getTextContent();
 
-                    books.add(new Book(title, writer, description));
+                    books.add(new Book(title, writer, category, description));
                 }
             }
 

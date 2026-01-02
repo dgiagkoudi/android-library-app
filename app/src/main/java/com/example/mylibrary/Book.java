@@ -3,12 +3,14 @@ package com.example.mylibrary;
 public class Book {
     private String title;
     private String writer;
-    private String desc;
+    private String category;
+    private String description;
 
-    public Book( String t, String w, String d){
-        title=t;
-        writer=w;
-        desc=d;
+    public Book( String title, String writer, String category, String description){
+        this.title=title;
+        this.writer=writer;
+        this.category=category;
+        this.description=description;
     }
 
     public String getTitle() {
@@ -19,11 +21,10 @@ public class Book {
         return writer;
     }
 
-    public String getDescription() {
-        return desc;
+    public String getCategory() {
+        return category;
     }
-
-    public boolean hasName(String b) {
-        return title.equals(b);
+    public String getDescription() {
+        return description;
     }
 }
