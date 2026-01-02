@@ -6,10 +6,12 @@
 
 Η εφαρμογή παρέχει:
 
-- Προβολή λίστας βιβλίων σε Spinner.
+- Προβολή και επιλογή βιβλίων μέσω Spinner.
+- Φιλτράρισμα της λίστας βιβλίων ανά κατηγορία με χρήση ChipGroup στο πρώτο fragment.
+- Δυναμική ενημέρωση του Spinner σύμφωνα με την επιλεγμένη κατηγορία.
 - Εμφάνιση λεπτομερειών βιβλίου σε δεύτερο fragment.
 - Δυνατότητα επιστροφής στο πρώτο fragment.
-- Αποθήκευση επιλογών βιβλίων σε τοπική βάση δεδομένων SQLite (SelectionLogger).
+- Αποθήκευση βιβλίων σε τοπική βάση δεδομένων SQLite (SelectionLogger).
 - Χρήση ViewModel για κοινή διαχείριση δεδομένων μεταξύ fragments.
 
 ## Τεχνολογίες που χρησιμοποιήθηκαν
@@ -20,6 +22,7 @@
 - Android Jetpack Navigation
 - ViewModel & LiveData
 - SQLite
+- Material Components
 
 ## Δομή φακέλων
 app/    
@@ -31,6 +34,7 @@ app/
 │ ├── Book.java    
 │ ├── BookList.java    
 │ ├── BookViewModel.java    
+│ ├── Categories.java    
 │ ├── SQLiteConnection.java    
 │ ├── SelectionLoggerContract.java    
 │ └── SelectionLoggerDbHelper.java    
@@ -40,7 +44,8 @@ app/
 │ ├── layout/    
 │ │ ├── main_activity.xml    
 │ │ ├── first_fragment.xml    
-│ │ └── second_fragment.xml    
+│ │ ├── second_fragment.xml    
+│ │ └── spinner_item.xml   
 │    
 │ ├── navigation/    
 │ │ └── nav_graph.xml    
