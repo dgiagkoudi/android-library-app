@@ -1,63 +1,100 @@
 # My Library (Android)
+[🇬🇷 Read this in Ελληνικά](./README_GR.md)
 
-Μια μικρή εφαρμογή Android για διαχείριση και προβολή βιβλίων σε μια βιβλιοθήκη. Ο χρήστης μπορεί να δει τη λίστα των διαθέσιμων βιβλίων, να επιλέξει ένα βιβλίο και να δει λεπτομέρειες όπως τίτλο, συγγραφέα και περιγραφή.
+Android application for browsing a library of books. Users can filter books by category, select a book, and view detailed information such as title, author, category, and description.
 
-## Περιγραφή
+## Features
 
-Η εφαρμογή παρέχει:
+- Browse a list of books
+- Filter books by category using chips
+- Select a book from a dropdown list (Spinner)
+- View detailed book information
+- Local logging of selections using SQLite
+- Fragment-based navigation
 
-- Προβολή και επιλογή βιβλίων μέσω Spinner.
-- Φιλτράρισμα της λίστας βιβλίων ανά κατηγορία με χρήση ChipGroup στο πρώτο fragment.
-- Δυναμική ενημέρωση του Spinner σύμφωνα με την επιλεγμένη κατηγορία.
-- Εμφάνιση λεπτομερειών βιβλίου σε δεύτερο fragment.
-- Δυνατότητα επιστροφής στο πρώτο fragment.
-- Αποθήκευση βιβλίων σε τοπική βάση δεδομένων SQLite (SelectionLogger).
-- Χρήση ViewModel για κοινή διαχείριση δεδομένων μεταξύ fragments.
+## Tech Stack
 
-## Τεχνολογίες που χρησιμοποιήθηκαν
-
-- Android Studio
 - Java
-- XML (Layout files)
-- Android Jetpack Navigation
-- ViewModel & LiveData
+- Android SDK
+- Android Studio
+- XML Layouts
+- Android Jetpack Navigation Component
+- ViewModel
 - SQLite
 - Material Components
 
-## Δομή φακέλων
-app/src/main/    
-├── java/com/example/mylibrary/    
-│ ├── Book.java    
-│ ├── BookList.java    
-│ ├── BookViewModel.java    
-│ ├── Categories.java    
-│ ├── FirstFragment.java   
-│ ├── MainActivity.java    
-│ ├── SQLiteConnection.java    
-│ ├── SecondFragment.java    
-│ ├── SelectionLoggerContract.java    
-│ └── SelectionLoggerDbHelper.java    
-│    
-├── res/    
-│ ├── color/   
-│ │  └── button_hover.xml    
-│ ├── layout/    
-│ │  ├── first_fragment.xml    
-│ │  ├── main_activity.xml    
-│ │ ├── second_fragment.xml    
-│ │ └── spinner_item.xml   
-│ ├── navigation/    
-│ │ └── nav_graph.xml    
-│ └── values/    
-│ │ ├── colors.xml    
-│ │ └── strings.xml    
-│    
-├── assets/    
-│ └── library.xml    
+## Architecture Overview
 
-## Τοπική εκτέλεση
+The application follows a simple layered structure with shared state management using Android ViewModel.
 
-1. Κλωνοποιήστε το repository.  
-2. Ανοίξτε το project με **Android Studio**.  
-3. Εκτελέστε **Build -> Rebuild Project** για να βεβαιωθείτε ότι όλα τα dependencies φορτώνονται σωστά.  
-4. Τρέξτε την εφαρμογή σε emulator ή πραγματική συσκευή Android.
+UI Layer (Fragments):
+- `FirstFragment`: Displays book list and category filters
+- `SecondFragment`: Displays selected book details
+
+State Management:
+- `BookViewModel` is used to share data between fragments
+- It holds the list of books and the currently selected book
+
+Data Source:
+- Book data is loaded from `assets/library.xml`
+- A helper class (`BookList`) parses and provides the data
+
+Local Storage:
+- SQLite is used to log user book selections locally
+- Implemented via `SQLiteConnection` and database helper classes
+
+## Project Structure
+
+```bash
+app/src/main/
+├── java/com/example/mylibrary/
+│ ├── Book.java
+│ ├── BookList.java
+│ ├── BookViewModel.java
+│ ├── Categories.java
+│ ├── FirstFragment.java
+│ ├── MainActivity.java
+│ ├── SQLiteConnection.java
+│ ├── SecondFragment.java
+│ ├── SelectionLoggerContract.java
+│ └── SelectionLoggerDbHelper.java
+│
+├── res/
+│ ├── color/
+│ │  └── button_hover.xml
+│ ├── layout/
+│ │  ├── first_fragment.xml
+│ │  ├── main_activity.xml
+│ │ ├── second_fragment.xml
+│ │ └── spinner_item.xml
+│ ├── navigation/
+│ │ └── nav_graph.xml
+│ └── values/
+│ │ ├── colors.xml
+│ │ └── strings.xml
+│
+├── assets/
+│ └── library.xml
+```
+
+## Local Setup
+
+1. Clone repository
+```bash
+git clone https://github.com/dgiagkoudi/android-library-app.git
+cd android-library-app
+```
+2. Open the project in Android Studio
+3. Let Gradle sync complete
+4. Run the app on an emulator or physical device
+
+## Future Improvements
+
+- Book search functionality
+- Favorites / Reading list
+- CRUD operations for books
+- Unit & UI testing
+
+## License
+
+This project is licensed under the MIT License.
